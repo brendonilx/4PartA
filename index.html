@@ -1,0 +1,84 @@
+<!--
+Brendon So
+
+FIXED the issue from HW3 so now the form works correctly when it starts at 1, and most other values, but there is bugs.
+So difficult I spent multiple days on this, mostly fixing HW3, I tried fixing the math but it just breaks the code and mostly I have to open browser multiple times
+For some reason when I update I have to double check if it even updates the page by opening 1-2x idk why
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="JavaScript.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--
+    https://www.w3schools.com/jquery/jquery_get_started.asp i use google which i have no choice
+    Spent so many time to try to add jquery locally , but it doesn't work or link, i downloaded and install based on youtube still. I don't know why.
+    -->
+</head>
+<body>
+    <div class="main">   
+        <form>
+            <label for="xs">X value start:</label>
+            <input type="number" id="xs" placeholder="Enter number...">
+            <p class="error" id="xs-error">X value start must be less than X value end</p>
+
+            <label for="xe">X value end:</label>
+            <input type="number" id="xe" placeholder="Enter number...">
+            <p class="error" id="xe-error">X value end must be greater than X value start</p>
+
+            <label for="ys">Y value start:</label>
+            <input type="number" id="ys" placeholder="Enter number...">
+            <p class="error" id="ys-error">Y value start must be less than Y value end</p>
+
+            <label for="ye">Y value end:</label>
+            <input type="number" id="ye" placeholder="Enter number...">
+            <p class="error" id="ye-error">Y value end must be greater than Y value start</p>
+
+            <script>
+                $(function () {
+                    /*
+                    https://html.form.guide/jquery/validation-using-jquery-examples/ //helped first version but couldnt debug used on method with them as selectors VVVV
+                    https://api.jquery.com/on/
+                    */
+                    $("#xs, #xe, #ys, #ye").on("input", function () {
+                        txs = xs();
+                        txe = xe();
+                        tys = ys();
+                        tye = ye();
+
+                        $(".error").hide(1000).text(''); //after
+
+                        if (txs > txe) {
+                            $("#xs-error").text("X value start must be less than X value end").show(1000);
+
+                        } else if (txe < txs) {
+                            $("#xe-error").text("X value end must be greater than X value start").show(1000);
+                        } else if (tys > tye) {
+                            $("#ys-error").text("Y value start must be less than Y value end").show(1000);
+                        } else if (tye < tys) {
+                            $("#ye-error").text("Y value end must be greater than Y value start").show(1000);
+                        }
+                        else {
+                            $(".error").hide(1000).text(''); //after
+                        }
+                    });
+                });
+            </script>
+            <button type="button" onclick="drawGrid()">Draws</button>
+        </form>
+    </div>
+
+    <div class="draw">
+        <p id="test"></p>
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+
